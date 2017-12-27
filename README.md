@@ -1,4 +1,2 @@
 # hello-world
-第一次使用github
-第一次提交更改
-用git拉取代码并更改
+1.JAVA目录下保存的是java的基础知识
