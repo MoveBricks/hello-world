@@ -1,0 +1,1707 @@
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+    
+    <html xmlns="http://www.w3.org/1999/xhtml">
+    
+<head><script type="text/javascript" src="/inj_js/common.js"></script>          
+            <link rel="canonical" href="http://blog.csdn.net/qq_27093465/article/details/52180865"/> 
+
+ <meta http-equiv="Cache-Control" content="no-siteapp" /><link rel="alternate" media="handheld" href="#" />
+
+    <meta name="shenma-site-verification" content="5a59773ab8077d4a62bf469ab966a63b_1497598848" /> 
+       
+    <title>Java 枚举(enum) 详解7种常见的用法 - 请叫我大师兄 - CSDN博客</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="description" content="JDK1.5引入了新的类型——枚举。在&#160;Java&#160;中它虽然算个“小”功能，却给我的开发带来了“大”方便。大师兄我又加上自己的理解，来帮助各位理解一下带参数的枚举。用法一：常量在JDK1.5&#160;之前，我们定义常量都是：&#160;publicstaticfianl....&#160;。现在好了，有了枚举，可以把相关的常量分组到一个枚举类型里，而且枚举提供了比常量更多的方法。&#160;Java代码&#160;public&#160;enum&#160;Color&#160;{" />
+
+    <meta name="keywords" content="枚举,java,enum" />
+    <script src="http://static.blog.csdn.net/scripts/blog_static_head.min.js" type="text/javascript"></script>
+
+
+    <link rel="Stylesheet" type="text/css" href="http://static.blog.csdn.net/skin/skin-yellow/css/style.css?v=1.4" />
+
+    
+
+    <link id="RSSLink" title="RSS" type="application/rss+xml" rel="alternate" href="/qq_27093465/rss/list" />
+    <link rel="shortcut icon" href="http://c.csdnimg.cn/public/favicon.ico" />
+    <link type="text/css" rel="stylesheet" href="http://static.blog.csdn.net/scripts/SyntaxHighlighter/styles/default.css" />
+ 
+
+
+
+    <link href="http://c.csdnimg.cn/blog/csdn_public_blog_detail.min.css" type="text/css" rel="stylesheet" />
+     
+         <link rel="stylesheet" href="http://static.blog.csdn.net/css/csdn_blog_detail.min.css" />
+
+  
+
+
+    <!-- 请置于所有广告位代码之前 --> 
+            <script src="http://dup.baidustatic.com/js/ds.js"></script>
+
+</head>
+
+
+
+<body>
+     
+        <div class="tracking-ad" data-view="true" data-mod="ad_popu_72"  data-mtp="62" data-order="40" data-con="ad_content_2072" >
+                     <script id="popuLayer_js_q" src="http://ads.csdn.net/js/popuLayer.js" defer="defer"  type="text/javascript"></script>
+                <div id="layerd" style="position: fixed;bottom:0px;right:0px;line-height:0px;z-index:1000">
+    	                <div class="J_close layer_close" style="display:;background-color:#efefef;padding:0px;color:#333;font:12px/24px Helvetica,Tahoma,Arial,sans-serif;text-align:right;">关闭</div><!-- 广告占位容器 -->
+                    <div id="cpro_u2895327">
+                        <!-- 投放代码 -->
+                        <script src="http://dup.baidustatic.com/js/ds.js"></script>
+                       <!-- 广告位：PC端-博客详情页右侧弹窗-300*250 -->
+                            <script>
+                                (function () {
+                                    var s = "_" + Math.random().toString(36).slice(2);
+                                    document.write('<div id="' + s + '"></div>');
+                                    (window.slotbydup = window.slotbydup || []).push({
+                                        id: '4740870',
+                                        container: s,
+                                        size: '300,250',
+                                        display: 'inlay-fix'
+                                    });
+                                })();
+                            </script>
+                    </div></div>
+                <script>  document.getElementById("popuLayer_js_q").onload = function () {
+      var styObjd = styObj = { width: "300px", "height": parseInt(250) + 28 };
+      window.CSDN.Layer.PopuLayer("#layerd", { storageName: "layerd", styleObj: styObjd, total: 50, expoire: 1000 * 60 });
+  }</script>
+            
+     
+        </div>
+
+    <!-- 广告位开始 -->
+        
+    <!-- 广告位结束 -->
+
+    
+   
+      <!--new top-->
+    <script id="toolbar-tpl-scriptId" fixed="true" prod="blog" skin="black" src="http://c.csdnimg.cn/public/common/toolbar/js/html.js" type="text/javascript"></script>
+     <!--new top-->
+    <div id="container">
+        
+<div id="header">
+    <div class="header">
+        <div id="blog_title">
+            <h2>
+                <a href="http://blog.csdn.net/qq_27093465">请叫我大师兄</a></h2>
+            <h3>屏上得来终觉浅，绝知此事要躬行。</h3>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="clear">
+        </div>
+        
+     
+    </div>
+</div>
+<div id="navigator">
+    <div class="navigator_bg">
+    </div>
+    <div class="navigator">
+        <ul>           
+                <li id="btnContents"><a href="http://blog.csdn.net/qq_27093465?viewmode=contents"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_mulu'])">
+                    <img src="http://static.blog.csdn.net/images/ico_list.gif">目录视图</span></a></li>
+                <li id="btnView"><a href="http://blog.csdn.net/qq_27093465?viewmode=list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_zhaiyao'])">
+                    <img src="http://static.blog.csdn.net/images/ico_summary.gif">摘要视图</span></a></li>
+                <li id="btnRss"><a href="http://blog.csdn.net/qq_27093465/rss/list"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_RSS'])">
+                    <img src="http://static.blog.csdn.net/images/ico_rss.gif">订阅</span></a></li>                   
+            
+
+            </ul>
+    </div>
+</div>
+<script type="text/javascript">
+    var username = "qq_27093465";
+    var _blogger = username;
+    var blog_address = "http://blog.csdn.net/qq_27093465";
+    var static_host = "http://static.blog.csdn.net";
+    var currentUserName = "";  
+</script>
+
+        <div id="body">
+            <div id="main">
+                <div class="main">
+                        <div class="ad_class">
+<div class="notice tracking-ad" data-mod='popu_3' > 
+
+<a href="http://blog.csdn.net/turingbooks/article/details/78475571">
+<font color=red><strong>图灵赠书——程序员11月书单</strong></font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp
+
+
+<a href="http://edu.csdn.net/topic/python2?utm_source=blog4">
+<font color=blue><strong>【思考】Python这么厉害的原因竟然是！</strong></font></a>
+&nbsp;&nbsp;&nbsp;&nbsp
+
+<a 
+href="http://blog.csdn.net/epubit17/article/details/78606519">
+<font color=blue><strong>感恩节赠书：《深度学习》等异步社区优秀图书和作译者评选启动！</strong></font></a>
+
+&nbsp;&nbsp;&nbsp;&nbsp
+
+
+<a href="http://blog.csdn.net/broadview2006/article/details/78603363">
+<font color=red><strong>每周荐书：京东架构、Linux内核、Python全栈</strong></font></a>
+
+
+
+</div>
+                        </div>
+
+                        
+
+
+
+
+
+  
+
+
+
+
+
+
+<script   type="text/javascript" src="http://static.blog.csdn.net/scripts/category.js"></script>
+
+  <script type="text/ecmascript">
+      window.quickReplyflag = true;
+      var isBole = false; 
+      var fasrc="http://my.csdn.net/my/favorite/miniadd?t=Java+%e6%9e%9a%e4%b8%be(enum)+%e8%af%a6%e8%a7%a37%e7%a7%8d%e5%b8%b8%e8%a7%81%e7%9a%84%e7%94%a8%e6%b3%95&u=http://blog.csdn.net/qq_27093465/article/details/52180865"
+    </script>
+<div id="article_details" class="details">
+    
+<div class="article_title">   
+         <span class="ico ico_type_Repost"></span>
+
+    <h1>
+        <span class="link_title"><a href="/qq_27093465/article/details/52180865">
+        Java 枚举(enum) 详解7种常见的用法        
+           
+        </a>
+        </span>
+
+         
+    </h1>
+</div>
+
+   
+
+    
+    <div class="article_manage clearfix">
+        <div class="article_l">
+            <span class="link_categories">
+            标签：
+              <a href='http://www.csdn.net/tag/%e6%9e%9a%e4%b8%be' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">枚举</a><a href='http://www.csdn.net/tag/java' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">java</a><a href='http://www.csdn.net/tag/enum' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">enum</a><a href='http://www.csdn.net/tag/%e5%b8%a6%e5%8f%82%e6%95%b0%e7%9a%84%e6%9e%9a%e4%b8%be' target=_blank onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_tag']);">带参数的枚举</a>
+            </span>
+        </div>
+        <div class="article_r">
+            <span class="link_postdate">2016-08-11 11:14</span>
+            <span class="link_view" title="阅读次数">93970人阅读</span>
+            <span class="link_comments" title="评论次数"> <a href="#comments" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_pinglun'])">评论</a>(24)</span>
+            <span class="link_collect tracking-ad" data-mod="popu_171"> <a href="javascript:void(0);" onclick="javascript:collectArticle('Java+%e6%9e%9a%e4%b8%be(enum)+%e8%af%a6%e8%a7%a37%e7%a7%8d%e5%b8%b8%e8%a7%81%e7%9a%84%e7%94%a8%e6%b3%95','52180865');return false;" title="收藏">收藏</a></span>
+             <span class="link_report"> <a href="#report" onclick="javascript:report(52180865,2);return false;" title="举报">举报</a></span>
+
+        </div>
+    </div>    <style type="text/css">        
+            .embody{
+                padding:10px 10px 10px;
+                margin:0 -20px;
+                border-bottom:solid 1px #ededed;                
+            }
+            .embody_b{
+                margin:0 ;
+                padding:10px 0;
+            }
+            .embody .embody_t,.embody .embody_c{
+                display: inline-block;
+                margin-right:10px;
+            }
+            .embody_t{
+                font-size: 12px;
+                color:#999;
+            }
+            .embody_c{
+                font-size: 12px;
+            }
+            .embody_c img,.embody_c em{
+                display: inline-block;
+                vertical-align: middle;               
+            }
+             .embody_c img{               
+                width:30px;
+                height:30px;
+            }
+            .embody_c em{
+                margin: 0 20px 0 10px;
+                color:#333;
+                font-style: normal;
+            }
+    </style>
+    <script  type="text/javascript">
+        $(function () {
+            try
+            {
+                var lib = eval("("+$("#lib").attr("value")+")");
+                var html = "";
+                if (lib.err == 0) {
+                    $.each(lib.data, function (i) {
+                        var obj = lib.data[i];
+                        //html += '<img src="' + obj.logo + '"/>' + obj.name + "&nbsp;&nbsp;";
+                        html += ' <a href="' + obj.url + '" target="_blank">';
+                        html += ' <img src="' + obj.logo + '">';
+                        html += ' <em><b>' + obj.name + '</b></em>';
+                        html += ' </a>';
+                    });
+                    if (html != "") {
+                        setTimeout(function () {
+                            $("#lib").html(html);                      
+                            $("#embody").show();
+                        }, 100);
+                    }
+                }      
+            } catch (err)
+            { }
+            
+        });
+    </script>
+      <div class="category clearfix">
+        <div class="category_l">
+           <img src="http://static.blog.csdn.net/images/category_icon.jpg">
+            <span>分类：</span>
+        </div>
+        <div class="category_r">
+                    <label  onclick="GetCategoryArticles('5713091','qq_27093465','top','52180865');">
+                        <span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_fenlei']);">java<em>（94）</em></span>
+                      <img class="arrow-down" src="http://static.blog.csdn.net/images/arrow_triangle _down.jpg" style="display:inline;">
+                      <img class="arrow-up" src="http://static.blog.csdn.net/images/arrow_triangle_up.jpg" style="display:none;">
+                        <div class="subItem">
+                            <div class="subItem_t"><a  href="http://blog.csdn.net/qq_27093465/article/category/5713091"  target="_blank">作者同类文章</a><i class="J_close">X</i></div>
+                            <ul class="subItem_l" id="top_5713091">                            
+                            </ul>
+                        </div>
+                    </label>                    
+        </div>
+    </div>
+
+  
+
+  
+  
+     
+
+
+
+
+<div id="article_content" class="article_content tracking-ad" data-mod=popu_307  data-dsm = "post" >
+
+<p></p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+JDK1.5引入了新的类型——枚举。在&nbsp;<span style="font-family:&quot;Times New Roman&quot;">Java</span>&nbsp;中它虽然算个“小”功能，却给我的开发带来了“大”方便。</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+大师兄我又加上自己的理解，来帮助各位理解一下。</p>
+<h2 style="line-height:1.5em; margin:0px 0px 0.5em; padding:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; background-color:rgb(239,239,239)">
+用法一：常量</h2>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+在<span style="font-family:&quot;Times New Roman&quot;">JDK1.5</span>&nbsp;之前，我们定义常量都是：&nbsp;<span style="font-family:&quot;Times New Roman&quot;">public static fianl....</span>&nbsp;。现在好了，有了枚举，可以把相关的常量分组到一个枚举类型里，而且枚举提供了比常量更多的方法。<span style="line-height:25.2px">&nbsp;</span></p>
+<div class="dp-highlighter" style="font-family:Monaco,&quot;DejaVu Sans Mono&quot;,&quot;Bitstream Vera Sans Mono&quot;,Consolas,&quot;Courier New&quot;,monospace; width:766.297px; overflow:auto; margin-left:9px; padding:1px; word-break:break-all; word-wrap:break-word; line-height:25.2px; background-color:rgb(239,239,239)">
+<div class="bar">
+<div class="tools" style="padding:3px; margin:0px; font-weight:bold">Java代码&nbsp;</div>
+</div>
+<ol start="1" class="dp-j" style="font-size:1em; line-height:1.4em; margin:0px 0px 1px; padding:2px 0px; border:1px solid rgb(209,215,220); color:rgb(43,145,175); background-color:rgb(255,255,255)">
+<li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black"><span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">enum</span>&nbsp;Color&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;RED,&nbsp;GREEN,&nbsp;BLANK,&nbsp;YELLOW&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">}&nbsp;&nbsp;</span></li></ol>
+</div>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+&nbsp;</p>
+<h2 style="line-height:1.5em; margin:0px 0px 0.5em; padding:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; background-color:rgb(239,239,239)">
+用法二：switch</h2>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+JDK1.6之前的switch语句只支持int,char,enum类型，使用枚举，能让我们的代码可读性更强。<span style="line-height:25.2px">&nbsp;</span></p>
+<div class="dp-highlighter" style="font-family:Monaco,&quot;DejaVu Sans Mono&quot;,&quot;Bitstream Vera Sans Mono&quot;,Consolas,&quot;Courier New&quot;,monospace; width:766.297px; overflow:auto; margin-left:9px; padding:1px; word-break:break-all; word-wrap:break-word; line-height:25.2px; background-color:rgb(239,239,239)">
+<div class="bar">
+<div class="tools" style="padding:3px; margin:0px; font-weight:bold">Java代码&nbsp;</div>
+</div>
+<ol start="1" class="dp-j" style="font-size:1em; line-height:1.4em; margin:0px 0px 1px; padding:2px 0px; border:1px solid rgb(209,215,220); color:rgb(43,145,175); background-color:rgb(255,255,255)">
+<li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black"><span class="keyword" style="color:rgb(127,0,85); font-weight:bold">enum</span>&nbsp;Signal&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;GREEN,&nbsp;YELLOW,&nbsp;RED&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black"><span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">class</span>&nbsp;TrafficLight&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;Signal&nbsp;color&nbsp;=&nbsp;Signal.RED;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">void</span>&nbsp;change()&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">switch</span>&nbsp;(color)&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">case</span>&nbsp;RED:&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color&nbsp;=&nbsp;Signal.GREEN;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">break</span>;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">case</span>&nbsp;YELLOW:&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color&nbsp;=&nbsp;Signal.RED;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">break</span>;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">case</span>&nbsp;GREEN:&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;color&nbsp;=&nbsp;Signal.YELLOW;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">break</span>;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">}&nbsp;&nbsp;</span></li></ol>
+</div>
+<br style="font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+&nbsp;</p>
+<h2 style="line-height:1.5em; margin:0px 0px 0.5em; padding:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; background-color:rgb(239,239,239)">
+用法三：向枚举中添加新方法</h2>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+如果打算自定义自己的方法，那么必须在enum实例序列的最后添加一个分号。而且&nbsp;<span style="font-family:&quot;Courier New&quot;">Java</span>&nbsp;要求必须先定义&nbsp;<span style="font-family:&quot;Courier New&quot;">enum</span>&nbsp;实例。<span style="line-height:25.2px">&nbsp;</span></p>
+<div class="dp-highlighter" style="font-family:Monaco,&quot;DejaVu Sans Mono&quot;,&quot;Bitstream Vera Sans Mono&quot;,Consolas,&quot;Courier New&quot;,monospace; width:766.297px; overflow:auto; margin-left:9px; padding:1px; word-break:break-all; word-wrap:break-word; line-height:25.2px; background-color:rgb(239,239,239)">
+<div class="bar">
+<div class="tools" style="padding:3px; margin:0px; font-weight:bold">Java代码&nbsp;</div>
+</div>
+<ol start="1" class="dp-j" style="font-size:1em; line-height:1.4em; margin:0px 0px 1px; padding:2px 0px; border:1px solid rgb(209,215,220); color:rgb(43,145,175); background-color:rgb(255,255,255)">
+<li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black"><span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">enum</span>&nbsp;Color&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;RED(<span class="string" style="color:blue">&quot;红色&quot;</span>,&nbsp;<span class="number" style="color:rgb(192,0,0)">1</span>),&nbsp;GREEN(<span class="string" style="color:blue">&quot;绿色&quot;</span>,&nbsp;<span class="number" style="color:rgb(192,0,0)">2</span>),&nbsp;BLANK(<span class="string" style="color:blue">&quot;白色&quot;</span>,&nbsp;<span class="number" style="color:rgb(192,0,0)">3</span>),&nbsp;YELLO(<span class="string" style="color:blue">&quot;黄色&quot;</span>,&nbsp;<span class="number" style="color:rgb(192,0,0)">4</span>);&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color:rgb(0,130,0); padding:0px; margin:0px; width:auto; border:0px">//&nbsp;成员变量</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">private</span>&nbsp;String&nbsp;name;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">private</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">int</span>&nbsp;index;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color:rgb(0,130,0); padding:0px; margin:0px; width:auto; border:0px">//&nbsp;构造方法</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">private</span>&nbsp;Color(String&nbsp;name,&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">int</span>&nbsp;index)&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.name&nbsp;=&nbsp;name;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.index&nbsp;=&nbsp;index;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color:rgb(0,130,0); padding:0px; margin:0px; width:auto; border:0px">//&nbsp;普通方法</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">static</span>&nbsp;String&nbsp;getName(<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">int</span>&nbsp;index)&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">for</span>&nbsp;(Color&nbsp;c&nbsp;:&nbsp;Color.values())&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">if</span>&nbsp;(c.getIndex()&nbsp;==&nbsp;index)&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">return</span>&nbsp;c.name;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">return</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">null</span>;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color:rgb(0,130,0); padding:0px; margin:0px; width:auto; border:0px">//&nbsp;get&nbsp;set&nbsp;方法</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;String&nbsp;getName()&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">return</span>&nbsp;name;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">void</span>&nbsp;setName(String&nbsp;name)&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.name&nbsp;=&nbsp;name;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">int</span>&nbsp;getIndex()&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">return</span>&nbsp;index;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">void</span>&nbsp;setIndex(<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">int</span>&nbsp;index)&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.index&nbsp;=&nbsp;index;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">}&nbsp;&nbsp;</span></li></ol>
+</div>
+<br style="font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+&nbsp;</p>
+<h2 style="line-height:1.5em; margin:0px 0px 0.5em; padding:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; background-color:rgb(239,239,239)">
+用法四：覆盖枚举的方法</h2>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+下面给出一个toString()方法覆盖的例子。<span style="line-height:25.2px">&nbsp;</span></p>
+<div class="dp-highlighter" style="font-family:Monaco,&quot;DejaVu Sans Mono&quot;,&quot;Bitstream Vera Sans Mono&quot;,Consolas,&quot;Courier New&quot;,monospace; width:766.297px; overflow:auto; margin-left:9px; padding:1px; word-break:break-all; word-wrap:break-word; line-height:25.2px; background-color:rgb(239,239,239)">
+<div class="bar">
+<div class="tools" style="padding:3px; margin:0px; font-weight:bold">Java代码&nbsp;</div>
+</div>
+<ol start="1" class="dp-j" style="font-size:1em; line-height:1.4em; margin:0px 0px 1px; padding:2px 0px; border:1px solid rgb(209,215,220); color:rgb(43,145,175); background-color:rgb(255,255,255)">
+<li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black"><span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">enum</span>&nbsp;Color&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;RED(<span class="string" style="color:blue">&quot;红色&quot;</span>,&nbsp;<span class="number" style="color:rgb(192,0,0)">1</span>),&nbsp;GREEN(<span class="string" style="color:blue">&quot;绿色&quot;</span>,&nbsp;<span class="number" style="color:rgb(192,0,0)">2</span>),&nbsp;BLANK(<span class="string" style="color:blue">&quot;白色&quot;</span>,&nbsp;<span class="number" style="color:rgb(192,0,0)">3</span>),&nbsp;YELLO(<span class="string" style="color:blue">&quot;黄色&quot;</span>,&nbsp;<span class="number" style="color:rgb(192,0,0)">4</span>);&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color:rgb(0,130,0); padding:0px; margin:0px; width:auto; border:0px">//&nbsp;成员变量</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">private</span>&nbsp;String&nbsp;name;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">private</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">int</span>&nbsp;index;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color:rgb(0,130,0); padding:0px; margin:0px; width:auto; border:0px">//&nbsp;构造方法</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">private</span>&nbsp;Color(String&nbsp;name,&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">int</span>&nbsp;index)&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.name&nbsp;=&nbsp;name;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.index&nbsp;=&nbsp;index;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color:rgb(0,130,0); padding:0px; margin:0px; width:auto; border:0px">//覆盖方法</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation" style="color:rgb(100,100,100)">@Override</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;String&nbsp;toString()&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">return</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.index&#43;<span class="string" style="color:blue">&quot;_&quot;</span>&#43;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.name;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">}&nbsp;&nbsp;</span></li></ol>
+</div>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+&nbsp;</p>
+<h2 style="line-height:1.5em; margin:0px 0px 0.5em; padding:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; background-color:rgb(239,239,239)">
+用法五：实现接口</h2>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+所有的枚举都继承自java.lang.Enum类。由于<span style="font-family:&quot;Courier New&quot;">Java</span>&nbsp;不支持多继承，所以枚举对象不能再继承其他类。<span style="line-height:25.2px">&nbsp;</span></p>
+<div class="dp-highlighter" style="font-family:Monaco,&quot;DejaVu Sans Mono&quot;,&quot;Bitstream Vera Sans Mono&quot;,Consolas,&quot;Courier New&quot;,monospace; width:766.297px; overflow:auto; margin-left:9px; padding:1px; word-break:break-all; word-wrap:break-word; line-height:25.2px; background-color:rgb(239,239,239)">
+<div class="bar">
+<div class="tools" style="padding:3px; margin:0px; font-weight:bold">Java代码&nbsp;</div>
+</div>
+<ol start="1" class="dp-j" style="font-size:1em; line-height:1.4em; margin:0px 0px 1px; padding:2px 0px; border:1px solid rgb(209,215,220); color:rgb(43,145,175); background-color:rgb(255,255,255)">
+<li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black"><span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">interface</span>&nbsp;Behaviour&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">void</span>&nbsp;print();&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;String&nbsp;getInfo();&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black"><span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">enum</span>&nbsp;Color&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">implements</span>&nbsp;Behaviour{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;RED(<span class="string" style="color:blue">&quot;红色&quot;</span>,&nbsp;<span class="number" style="color:rgb(192,0,0)">1</span>),&nbsp;GREEN(<span class="string" style="color:blue">&quot;绿色&quot;</span>,&nbsp;<span class="number" style="color:rgb(192,0,0)">2</span>),&nbsp;BLANK(<span class="string" style="color:blue">&quot;白色&quot;</span>,&nbsp;<span class="number" style="color:rgb(192,0,0)">3</span>),&nbsp;YELLO(<span class="string" style="color:blue">&quot;黄色&quot;</span>,&nbsp;<span class="number" style="color:rgb(192,0,0)">4</span>);&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color:rgb(0,130,0); padding:0px; margin:0px; width:auto; border:0px">//&nbsp;成员变量</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">private</span>&nbsp;String&nbsp;name;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">private</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">int</span>&nbsp;index;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color:rgb(0,130,0); padding:0px; margin:0px; width:auto; border:0px">//&nbsp;构造方法</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">private</span>&nbsp;Color(String&nbsp;name,&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">int</span>&nbsp;index)&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.name&nbsp;=&nbsp;name;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.index&nbsp;=&nbsp;index;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black"><span class="comment" style="color:rgb(0,130,0); padding:0px; margin:0px; width:auto; border:0px">//接口方法</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation" style="color:rgb(100,100,100)">@Override</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;String&nbsp;getInfo()&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">return</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.name;&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment" style="color:rgb(0,130,0); padding:0px; margin:0px; width:auto; border:0px">//接口方法</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="annotation" style="color:rgb(100,100,100)">@Override</span>&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">void</span>&nbsp;print()&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;System.out.println(<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.index&#43;<span class="string" style="color:blue">&quot;:&quot;</span>&#43;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">this</span>.name);&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">}&nbsp;&nbsp;</span></li></ol>
+</div>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+&nbsp;</p>
+<h2 style="line-height:1.5em; margin:0px 0px 0.5em; padding:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; background-color:rgb(239,239,239)">
+用法六：使用接口组织枚举</h2>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+&nbsp;<span style="font-family:Monaco,&quot;DejaVu Sans Mono&quot;,&quot;Bitstream Vera Sans Mono&quot;,Consolas,&quot;Courier New&quot;,monospace; line-height:25.2px; font-size:12px"><strong>Java代码&nbsp;</strong></span></p>
+<div class="dp-highlighter" style="font-family:Monaco,&quot;DejaVu Sans Mono&quot;,&quot;Bitstream Vera Sans Mono&quot;,Consolas,&quot;Courier New&quot;,monospace; width:766.297px; overflow:auto; margin-left:9px; padding:1px; word-break:break-all; word-wrap:break-word; line-height:25.2px; background-color:rgb(239,239,239)">
+<ol start="1" class="dp-j" style="font-size:1em; line-height:1.4em; margin:0px 0px 1px; padding:2px 0px; border:1px solid rgb(209,215,220); color:rgb(43,145,175); background-color:rgb(255,255,255)">
+<li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black"><span class="keyword" style="color:rgb(127,0,85); font-weight:bold">public</span>&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">interface</span>&nbsp;Food&nbsp;{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">enum</span>&nbsp;Coffee&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">implements</span>&nbsp;Food{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;BLACK_COFFEE,DECAF_COFFEE,LATTE,CAPPUCCINO&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">enum</span>&nbsp;Dessert&nbsp;<span class="keyword" style="color:rgb(127,0,85); font-weight:bold">implements</span>&nbsp;Food{&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FRUIT,&nbsp;CAKE,&nbsp;GELATO&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;</span></li><li style="font-size:1em; margin:0px 0px 0px 38px; padding:0px 0px 0px 10px; border-left:1px solid rgb(209,215,220); line-height:18px; background-color:rgb(250,250,250)">
+<span style="color:black">}&nbsp;&nbsp;</span></li></ol>
+</div>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+&nbsp;</p>
+<h2 style="line-height:1.5em; margin:0px 0px 0.5em; padding:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; background-color:rgb(239,239,239)">
+用法七：关于枚举集合的使用</h2>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+java.util.EnumSet和java.util.EnumMap是两个枚举集合。EnumSet保证集合中的元素不重复；EnumMap中的 key是enum类型，而value则可以是任意类型。关于这个两个集合的使用就不在这里赘述，可以参考JDK文档。</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+关于枚举的实现细节和原理请参考：</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+参考资料：《ThinkingInJava》第四版</p>
+<p style="margin-top:0px; margin-bottom:0px; padding-top:0px; padding-bottom:0px; font-family:Helvetica,Tahoma,Arial,sans-serif; font-size:14px; line-height:25.2px; background-color:rgb(239,239,239)">
+<a target="_blank" target="_blank" href="http://softbeta.iteye.com/blog/1185573" style="color:rgb(0,102,153)">http://softbeta.iteye.com/blog/1185573</a></p>
+<br>
+<p><span style="font-size:18px"><strong>我的这篇文章，因为是转载的，可能基本就没有变动，导致被某人踩了一脚。觉得不符合我大师兄的性&#26684;。下面我把自己的使用理解给整理一下。</strong></span></p>
+<p><span style="font-size:18px"><strong>也是因为因为当时刚刚开始学习吧。把平时自以为了解的东西都只是大概了解了一下，说到底，还是自以为了解了，其实转&#30524;就不知道什么是什么了。<br>
+出来学习，不习惯看代码怎么能行呢？<br>
+下面是我自己的测试代码。</strong></span><br>
+</p>
+<p><br>
+</p>
+<p></p>
+<pre code_snippet_id="2069413" snippet_file_name="blog_20161222_1_7526921" name="code" class="java">package com.lxk.enumTest;
+
+/**
+ * Java枚举用法测试
+ * &lt;p&gt;
+ * Created by lxk on 2016/12/15
+ */
+public class EnumTest {
+    public static void main(String[] args) {
+        forEnum();
+        useEnumInJava();
+    }
+
+    /**
+     * 循环枚举,输出ordinal属性；若枚举有内部属性，则也输出。(说的就是我定义的TYPE类型的枚举的typeName属性)
+     */
+    private static void forEnum() {
+        for (SimpleEnum simpleEnum : SimpleEnum.values()) {
+            System.out.println(simpleEnum + &quot;  ordinal  &quot; + simpleEnum.ordinal());
+        }
+        System.out.println(&quot;------------------&quot;);
+        for (TYPE type : TYPE.values()) {
+            System.out.println(&quot;type = &quot; + type + &quot;    type.name = &quot; + type.name() + &quot;   typeName = &quot; + type.getTypeName() + &quot;   ordinal = &quot; + type.ordinal());
+        }
+    }
+
+    /**
+     * 在Java代码使用枚举
+     */
+    private static void useEnumInJava() {
+        String typeName = &quot;f5&quot;;
+        TYPE type = TYPE.fromTypeName(typeName);
+        if (TYPE.BALANCE.equals(type)) {
+            System.out.println(&quot;根据字符串获得的枚举类型实例跟枚举常量一致&quot;);
+        } else {
+            System.out.println(&quot;大师兄代码错误&quot;);
+        }
+
+    }
+
+    /**
+     * 季节枚举(不带参数的枚举常量)这个是最简单的枚举使用实例
+     * Ordinal 属性，对应的就是排列顺序，从0开始。
+     */
+    private enum SimpleEnum {
+        SPRING,
+        SUMMER,
+        AUTUMN,
+        WINTER
+    }
+
+
+    /**
+     * 常用类型(带参数的枚举常量，这个只是在书上不常见，实际使用还是很多的，看懂这个，使用就不是问题啦。)
+     */
+    private enum TYPE {
+        FIREWALL(&quot;firewall&quot;),
+        SECRET(&quot;secretMac&quot;),
+        BALANCE(&quot;f5&quot;);
+
+        private String typeName;
+
+        TYPE(String typeName) {
+            this.typeName = typeName;
+        }
+
+        /**
+         * 根据类型的名称，返回类型的枚举实例。
+         *
+         * @param typeName 类型名称
+         */
+        public static TYPE fromTypeName(String typeName) {
+            for (TYPE type : TYPE.values()) {
+                if (type.getTypeName().equals(typeName)) {
+                    return type;
+                }
+            }
+            return null;
+        }
+
+        public String getTypeName() {
+            return this.typeName;
+        }
+    }
+}
+</pre><br>
+<br>
+<p></p>
+<strong><span style="font-size:18px"><br>
+然后是测试的结果图：</span></strong>
+<p></p>
+<p><img src="http://img.blog.csdn.net/20161222184629554" alt=""><br>
+</p>
+<p><br>
+</p>
+<p><span style="font-size:18px">简单的例子，大家基本都用过，看不懂的基本都是第二个例子。可以看到，在第二个例子里面，后面带有参数，其实可以这么理解。</span></p>
+<p><span style="font-size:18px">enum这个关键字，可以理解为跟class差不多，这也个单独的类。可以看到，上面的例子里面有属性，有构造方法，有getter，也可以有setter，但是一般都是构造传参数。还有其他自定义方法。那么在这些东西前面的，以逗号隔开的，最后以分号结尾的，这部分叫做，这个枚举的实例。也可以理解为，class &nbsp;new 出来的实例对象。这下就好理解了。只是，class，new对象，可以自己随便new，想几个就几个，而这个enum关键字，他就不行，他的实例对象，只能在这个enum里面体现。也就是说，他对应的实例是有限的。这也就是枚举的好处了，限制了某些东西的范围，举个栗子：一年四季，只能有春夏秋冬，你要是字符串表示的话，那就海了去了，但是，要用枚举类型的话，你在enum的大括号里面把所有的选项，全列出来，那么这个季节的属性，对应的&#20540;，只能在里面挑。不能有其他的。</span></p>
+<p><span style="font-size:18px">我上面的例子，就是根据typeName，你可以从那些例子里面挑选到唯一的一个TYPE类型的枚举实例--TYPE.BALANCE。注意方法</span></p>
+<p><span style="font-size:18px">TYPE type = TYPE.fromTypeName(typeName);<br>
+这个方法的返回类型就是这个TYPE枚举类型的。<br>
+这下就好理解，这个枚举是怎么在工作了吧</span><br>
+</p>
+<p>再补充一下：</p>
+<p>上面那个带参数的枚举类型的实例里面实际上是三个属性，除了我自定义的typeName以外，还有2个是系统自带的。看下面源码的图：</p>
+<p><img src="http://img.blog.csdn.net/20161222185233843" alt=""><br>
+</p>
+<p><br>
+</p>
+<p>看到这里之后，不知道你能不能理解下面图片内说明的话：下面图片主要说明在使用枚举时，的规范和标准。希望可以在实际开发时候用到</p>
+<p><img src="http://img.blog.csdn.net/20170112172420090" alt=""><br>
+</p>
+<p><img src="http://img.blog.csdn.net/20170112172408793" alt=""><br>
+</p>
+<p><strong><span style="font-size:18px">最后补充一点：</span></strong></p>
+<p>也许你知道呢，但是也许你不知道呢？我是真的不知道，测了之后才知道！！！</p>
+<p><strong><span style="font-size:18px">枚举类型对象之间的&#20540;比较，是可以使用==，直接来比较&#20540;，是否相等的，不是必须使用equals方法的哟。</span></strong></p>
+<p>具体，请参考下面的链接：</p>
+<p><a target="_blank" target="_blank" href="http://blog.csdn.net/qq_27093465/article/details/70237349">java 枚举类比较是用==还是equals？</a><br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+<p><strong><span style="font-size:18px; color:#ff0000">2017.11.07 更新</span></strong></p>
+<p>有的老铁，说这个switch case怎么写，我就在下面再啰嗦一下。</p>
+<p><pre name="code" class="java">    private static void testSwitchCase() {
+        String typeName = &quot;f5&quot;;
+        //这几行注释呢，你可以试着三选一，测试一下效果。
+        //String typeName = &quot;firewall&quot;;
+        //String typeName = &quot;secretMac&quot;;
+        TypeEnum typeEnum = TypeEnum.fromTypeName(typeName);
+        if (typeEnum == null) {
+            return;
+        }
+        switch (typeEnum) {
+            case FIREWALL:
+                System.out.println(&quot;枚举名称(即默认自带的属性 name 的值)是：&quot; + typeEnum.name());
+                System.out.println(&quot;排序值(默认自带的属性 ordinal 的值)是：&quot; + typeEnum.ordinal());
+                System.out.println(&quot;枚举的自定义属性 typeName 的值是：&quot; + typeEnum.getTypeName());
+                break;
+            case SECRET:
+                System.out.println(&quot;枚举名称(即默认自带的属性 name 的值)是：&quot; + typeEnum.name());
+                System.out.println(&quot;排序值(默认自带的属性 ordinal 的值)是：&quot; + typeEnum.ordinal());
+                System.out.println(&quot;枚举的自定义属性 typeName 的值是：&quot; + typeEnum.getTypeName());
+                break;
+            case BALANCE:
+                System.out.println(&quot;枚举名称(即默认自带的属性 name 的值)是：&quot; + typeEnum.name());
+                System.out.println(&quot;排序值(默认自带的属性 ordinal 的值)是：&quot; + typeEnum.ordinal());
+                System.out.println(&quot;枚举的自定义属性 typeName 的值是：&quot; + typeEnum.getTypeName());
+                break;
+            default:
+                System.out.println(&quot;default&quot;);
+        }
+    }
+</pre><br>
+然后，就是运行结果的截图。</p>
+<p><img src="http://img.blog.csdn.net/20171107142120698" alt=""><br>
+</p>
+<p>老铁们，看完这个枚举，你要懂个概念，那就是，这个枚举，他是个对象，就像你定义的Student类，Person类，等等一些个类一样。</p>
+<p>要有这么个概念。只要是个类，他就可以有构造函数，可以有属性，可以有方法。</p>
+<p>对的，老铁，你对这个属性，构造函数啥的，有概念吧，没有的话，我可就郁闷啦。</p>
+<p>然后，你就看到，这个地方有2个默认的属性，一个是name，一个是ordinal，这2个属性就像你定义Student类和Person类的name和age一样，</p>
+<p>只不过，这2个是系统自带的属性，不用你自己去定义啦。</p>
+<p>你也可以给这个枚举类，也就是你自己声明的枚举，随便加属性。</p>
+<p>我上面代码例子里面的那个TypeEnum那个枚举，就是这么干的，就简单的添加了个自定义属性typeName，</p>
+<p>虽然他有自己的name了，那姑且叫我这个自定义的属性叫别名吧。</p>
+<p>可以看到，我例子里面就是通过自己写的那个构造方法给我这个自定义的属性初始化&#20540;的。</p>
+<p>还有，这个构造方法是不可以，也不被运行public的，不信，你可以试试。</p>
+<p>还有，你不能对系统自带的name属性，在构造函数里面赋&#20540;，没有为什么。</p>
+<p><br>
+</p>
+<p><br>
+</p>
+<p><br>
+</p>
+   
+</div>
+
+
+
+
+<!-- Baidu Button BEGIN -->
+
+
+
+
+
+<div class="bdsharebuttonbox tracking-ad" style="float: right;" data-mod="popu_172">
+<a href="#" class="bds_more" data-cmd="more" style="background-position:0 0 !important; background-image: url(http://bdimg.share.baidu.com/static/api/img/share/icons_0_16.png?v=d754dcc0.png) !important"></a>
+<a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"  style="background-position:0 -52px !important"></a>
+<a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"style="background-position:0 -104px !important"></a>
+<a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"style="background-position:0 -260px !important"></a>
+<a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"style="background-position:0 -208px !important"></a>
+<a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"style="background-position:0 -1612px !important" ></a>
+</div>
+<script>window._bd_share_config = { "common": { "bdSnsKey": {}, "bdText": "", "bdMini": "1", "bdMiniList": false, "bdPic": "", "bdStyle": "0", "bdSize": "16" }, "share": {} }; with (document) 0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+<!-- Baidu Button END -->
+
+   
+
+<!--172.16.140.12-->
+
+<!-- Baidu Button BEGIN -->
+<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=1536434" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+    document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
+</script>
+<!-- Baidu Button END -->
+
+
+
+ 
+
+
+
+
+        <div id="digg" ArticleId="52180865" >
+            <dl id="btnDigg" class="digg digg_disable"  onclick="btndigga();">
+               
+                 <dt>顶</dt>
+                <dd>53</dd>
+            </dl>
+           
+              
+            <dl id="btnBury" class="digg digg_disable"  onclick="btnburya();">
+              
+                  <dt>踩</dt>
+                <dd>5</dd>               
+            </dl>
+            
+        </div>
+     <div class="tracking-ad" data-mod="popu_222"><a href="javascript:void(0);" >&nbsp;</a>   </div>
+    <div class="tracking-ad" data-mod="popu_223"> <a href="javascript:void(0);" >&nbsp;</a></div>
+    <script type="text/javascript">
+        function btndigga() {
+            $(".tracking-ad[data-mod='popu_222'] a").click();
+        }
+        function btnburya() {
+            $(".tracking-ad[data-mod='popu_223'] a").click();
+        }
+            </script>
+
+   <ul class="article_next_prev">
+                <li class="prev_article"><span  onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian']);location.href='http://blog.csdn.net/qq_27093465/article/details/52162631';">上一篇</span><a href="http://blog.csdn.net/qq_27093465/article/details/52162631" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_shangyipian'])">http协议学习系列(虚拟主机的实现)</a></li>
+                <li class="next_article"><span onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian']);location.href='http://blog.csdn.net/qq_27093465/article/details/52181860';">下一篇</span><a href="http://blog.csdn.net/qq_27093465/article/details/52181860" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_xiayipian'])">Java开发岗位面试题归类---怎么好好的准备面试，也算是发展学习方向</a></li>
+    </ul>
+
+    <div style="clear:both; height:10px;"></div>
+
+
+            <div class="similar_article"   >
+                    <h4></h4>
+                    <div class="similar_c"style="margin:20px 0px 0px 0px">
+                        <div class="similar_c_t">
+                          &nbsp;&nbsp;相关文章推荐
+                        </div>
+                   
+                        <div class="similar_wrap tracking-ad" data-mod="popu_36"  style="max-height:250px">                       
+                            <ul class="similar_list fl">    
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/wgw335363240/article/details/6359614" title="java枚举类型enum的使用" strategy="BlogCommendFromBaidu_0" target="_blank">java枚举类型enum的使用</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://edu.csdn.net/huiyiCourse/series_detail/74?utm_source=blog7" title="MySQL在微信支付下的高可用运营--莫晓东" strategy="undefined" target="_blank">MySQL在微信支付下的高可用运营--莫晓东</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/u014527058/article/details/52751488" title="浅谈在Java开发中的枚举的作用和用法" strategy="BlogCommendFromBaidu_1" target="_blank">浅谈在Java开发中的枚举的作用和用法</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://edu.csdn.net/huiyiCourse/series_detail/73?utm_source=blog7" title="容器技术在58同城的实践--姚远" strategy="undefined" target="_blank">容器技术在58同城的实践--姚远</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/Sup_Heaven/article/details/35295851" title="Java学习整理系列之Java枚举类型的使用" strategy="BlogCommendFromBaidu_2" target="_blank">Java学习整理系列之Java枚举类型的使用</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://edu.csdn.net/huiyiCourse/series_detail/73?utm_source=blog7" title="SDCC 2017之容器技术实战线上峰会" strategy="undefined" target="_blank">SDCC 2017之容器技术实战线上峰会</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/javazejian/article/details/71333103" title="深入理解Java枚举类型(enum)" strategy="BlogCommendFromBaidu_3" target="_blank">深入理解Java枚举类型(enum)</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://edu.csdn.net/huiyiCourse/series_detail/74?utm_source=blog7" title="SDCC 2017之数据库技术实战线上峰会" strategy="undefined" target="_blank">SDCC 2017之数据库技术实战线上峰会</a>
+                                   </li>
+                            </ul>
+                              <ul class="similar_list fr">      
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/anhuoren/article/details/41313213" title="Java 枚举类Enum的用法总结" strategy="BlogCommendFromBaidu_4" target="_blank">Java 枚举类Enum的用法总结</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://edu.csdn.net/huiyiCourse/series_detail/73?utm_source=blog7" title="腾讯云容器服务架构实现介绍--董晓杰" strategy="undefined" target="_blank">腾讯云容器服务架构实现介绍--董晓杰</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/caomiao2006/article/details/51586038" title="java中枚举的详细使用介绍" strategy="BlogCommendFromBaidu_5" target="_blank">java中枚举的详细使用介绍</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://edu.csdn.net/huiyiCourse/series_detail/74?utm_source=home7" title="微博热点事件背后的数据库运维心得--张冬洪" strategy="undefined" target="_blank">微博热点事件背后的数据库运维心得--张冬洪</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/pangesange/article/details/54573382" title="java 枚举——java中枚举的运用和使用场景" strategy="BlogCommendFromBaidu_6" target="_blank">java 枚举——java中枚举的运用和使用场景</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/Ideality_hunter/article/details/53334249" title="java枚举类型enum的使用实例，以及java程序中常量有什么用？" strategy="BlogCommendFromBaidu_7" target="_blank">java枚举类型enum的使用实例，以及java程序中常量有什么用？</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/Kikitious_Du/article/details/78204287" title="Java枚举enum的用法" strategy="BlogCommendFromBaidu_8" target="_blank">Java枚举enum的用法</a>
+                                   </li>
+                                   <li>
+                                       <em>•</em>
+                                       <a href="http://blog.csdn.net/qq_35893120/article/details/54892140" title="Java 枚举(enum) 详解7种常见的用法" strategy="BlogCommendFromBaidu_9" target="_blank">Java 枚举(enum) 详解7种常见的用法</a>
+                                   </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>   
+   
+      
+</div>
+
+     <div>
+           
+
+       
+                           
+            <!-- 广告位：PC端-博客内容页-banner1-960*90 --> 
+           
+         <!-- 广告位：PC端-博客详情页底部banner-960*90 -->
+            <script>
+                (function() {
+                    var s = "_" + Math.random().toString(36).slice(2);
+                    document.write('<div id="' + s + '"></div>');
+                    (window.slotbydup=window.slotbydup || []).push({
+                        id: '4770928',
+                        container: s,
+                        size: '960,90',
+                        display: 'inlay-fix'
+                    });
+                })();
+            </script>
+    </div>
+
+<div id="suggest"></div>
+         <script  language="javascript" type='text/javascript'>     
+             $(function(){
+                 $.get("/qq_27093465/svc/GetSuggestContent/52180865",function(data){
+                     $("#suggest").html(data);
+                 });     
+             });             
+         </script>  
+
+
+
+
+            
+                                    
+            
+                                    
+
+        <!-- 广告位开始 -->
+        <!-- 广告位结束 -->
+
+
+
+<div class="comment_class">
+    <div id="comment_title" class="panel_head">
+        <span class="see_comment">查看评论</span><a name="comments"></a></div>
+    <div id="comment_list">
+    </div>
+    <div id="comment_bar">
+    </div>
+    <div id="comment_form">
+    </div>
+    <div class="announce">
+        * 以上用户言论只代表其个人观点，不代表CSDN网站的观点或立场<a name="reply"></a><a name="quote"></a></div>
+</div>
+
+<script type="text/javascript">
+    var fileName = '52180865';
+    var commentscount = 24;
+    var islock = false
+</script>
+
+    <div id="ad_bot">
+    </div>
+<div id="report_dialog">
+</div>
+
+<div id="d-top"  style="bottom:60px;">
+
+
+        <a id="quick-reply" class="btn btn-top q-reply" title="快速回复" style="display:none;">
+            <img src="http://static.blog.csdn.net/images/blog-icon-reply.png" alt="快速回复">
+        </a>    
+    <a id="d-top-a" class="btn btn-top backtop"  style="display: none;" title="返回顶部" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_huidaodingbu'])" style="">         
+         <img src="http://static.blog.csdn.net/images/top.png" alt="TOP">
+    </a>
+</div>
+<script type="text/javascript">
+    $(function ()
+    {
+        $("#ad_frm_0").height("90px");
+        
+        setTimeout(function(){
+            $("#ad_frm_2").height("200px");
+        },1000);    
+    });
+  
+</script>
+<style type="text/css">
+    .tag_list
+    {
+        background: none repeat scroll 0 0 #FFFFFF;
+        border: 1px solid #D7CBC1;
+        color: #000000;
+        font-size: 12px;
+        line-height: 20px;
+        list-style: none outside none;
+        margin: 10px 2% 0 1%;
+        padding: 1px;
+    }
+    .tag_list h5
+    {
+        background: none repeat scroll 0 0 #E0DBD3;
+        color: #47381C;
+        font-size: 12px;
+        height: 24px;
+        line-height: 24px;
+        padding: 0 5px;
+        margin: 0;
+    }
+    .tag_list h5 a
+    {
+        color: #47381C;
+    }
+    .classify
+    {
+        margin: 10px 0;
+        padding: 4px 12px 8px;
+    }
+    .classify a
+    {
+        margin-right: 20px;
+        white-space: nowrap;
+    }
+</style>
+
+
+
+
+
+
+<div id="pop_win" style="display:none ;position: absolute; z-index: 10000; border: 1px solid rgb(220, 220, 220); top: 222.5px; left: 630px; opacity: 1; background: none 0px 0px repeat scroll rgb(255, 255, 255);">
+    
+</div>
+<div id="popup_mask"></div>
+<style>
+    #popup_mask
+    {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        z-index: 9999;
+        left: 0px;
+        top: 0px;
+        opacity: 0.3;
+        filter: alpha(opacity=30);
+        display: none;
+    }
+
+</style>
+
+
+
+
+
+<script type="text/javascript">
+    $(function(){        
+        
+        setTimeout(function(){
+            $(".comment_body:contains('回复')").each(function(index,item){
+                var u=$(this).text().split('：')[0].toString().replace("回复","")
+                var thisComment=$(this);
+                if(u)
+                {
+                    $.getJSON("https://passport.csdn.net/get/nick?callback=?", {users: u}, function(a) {
+                        if(a!=null&&a.data!=null&&a.data.length>0)
+                        {
+                            nick=a.data[0].n; 
+                            if(u!=nick)
+                            {
+                                thisComment.text(thisComment.text().replace(u,nick));  
+                            }
+                        }       
+                    });  
+                }
+            });         
+
+        },200);  
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },5000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },10000);
+
+        setTimeout(function(){
+            $(".math").each(function(index,value){$(this).find("span").last().css("color","#fff"); })
+        },15000);
+        
+        setTimeout(function(){
+            $("a img[src='http://js.tongji.linezing.com/stats.gif']").parent().css({"position":"absolute","left":"50%"});
+        },300);
+    });
+
+    function loginbox(){
+        var $logpop=$("#pop_win");
+        $logpop.html('<iframe src="https://passport.csdn.net/account/loginbox?service=http://static.blog.csdn.net/callback.htm" frameborder="0" height="600" width="400" scrolling="no"></iframe>');
+
+        $('#popup_mask').css({
+            opacity: 0.5,
+            width: $( document ).width() + 'px',
+            height:  $( document ).height() + 'px'
+        });
+        $('#popup_mask').css("display","block");
+ 
+        $logpop.css( {
+            top: ($( window ).height() - $logpop.height())/ 2  + $( window 
+       ).scrollTop() + 'px',
+            left:($( window ).width() - $logpop.width())/ 2
+        } );
+ 
+        setTimeout( function () {
+            $logpop.show();
+            $logpop.css( {
+                opacity: 1
+            } );
+        }, 200 );
+ 
+        $('#popup_mask').unbind("click");
+        $('#popup_mask').bind("click", function(){
+            $('#popup_mask').hide();
+            var $clopop = $("#pop_win");
+            $("#common_ask_div_sc").css("display","none");
+            $clopop.css( {
+                opacity: 0
+            } );
+            setTimeout( function () {
+                $clopop.hide();
+            }, 350 );
+            return false;
+        });
+    }   
+
+    var articletitle='Java 枚举(enum) 详解7种常见的用法';
+
+</script>
+
+
+
+
+
+
+
+
+
+
+                        <div class="clear">
+                        </div>
+                    </div>                   
+                
+            </div>
+                   
+           <div id="side">
+               
+
+    <div class="side">
+
+ 
+
+<div id="custom_column_62034516" class="panel">
+<ul class="panel_head"><span>老铁们，支付宝扫一扫，领红包啦!</span></ul>
+<ul class="panel_body">
+
+<div style="text-align:center"><a href="http://blog.csdn.net/qq_27093465/article/details/78491807" target="_blank"><img src="http://img.blog.csdn.net/20171107094235209" title="对，你没看错，扫一扫，红包是你的，多的有5块的，少的怎么也得一毛多呢！扫一扫，不吃亏，不上当，以湿胸的人品担保。" style="width:256px; height:310px; margin-left:-8px">
+</a><marquee style="letter-spacing:5px; color:#ff1c1a; font-weight:bold">扫一扫，红包是你的！对，你没看错，天天都有效，可以直接保存，天天扫，天天拿。不信？搞一哈，就造啦！！！
+</marquee></div>
+
+</ul>
+</div>
+<div id="panel_Profile" class="panel">
+<ul class="panel_head"><span>个人资料</span></ul>
+<ul class="panel_body profile">
+<div id="blog_userface">
+    <a href="http://my.csdn.net/qq_27093465" target="_blank">
+    <img src="http://avatar.csdn.net/B/6/7/1_qq_27093465.jpg" title="访问我的空间" style="max-width:90%"/>
+    </a>
+    <br />
+    <span><a href="http://my.csdn.net/qq_27093465" class="user_name" target="_blank">qq_27093465</a></span>
+</div>
+<div class="interact">
+
+    <a href="javascript:void(0);" class="attent" id="span_add_follow" title="[加关注]"></a>
+
+ <a href="javascript:void(0);" class="letter"  title="[发私信]" onclick="window.open('http://msg.csdn.net/letters/model?receiver=qq_27093465','_blank','height=350,width=700');_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_sixin'])"></a>  
+</div>
+<div id="blog_medal">
+                         <div class="ico_expert" title="CSDN博客准专家"  onclick="javascript:location='http://blog.csdn.net/experts/rule.html'" style=" cursor:pointer;width:54px;height:60px;background:url('http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/bokezhunzhuanjiamiddle.png') no-repeat" ></div>
+                <div id="bms_box">
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/zhuanlandaren.png" onmouseover="m_over_m(this,2)" onmouseout="m_out_m()" alt="2" >
+                                            </a>
+                                            <a  target="_blank">
+                                                    <img src="http://c.csdnimg.cn/jifen/images/xunzhang/xunzhang/chizhiyiheng.png" onmouseover="m_over_m(this,4)" onmouseout="m_out_m()" alt="2" >
+                                            </a>
+               </div>
+
+</div>
+<ul id="blog_rank">
+    <li>访问：<span>2213373次</span></li>
+    <li>积分：<span>19832</span> </li>    
+    <li >等级： <span style="position:relative;display:inline-block;z-index:1" >
+            <img src="http://c.csdnimg.cn/jifen/images/xunzhang/jianzhang/blog7.png" alt="" style="vertical-align: middle;" id="leveImg">
+            <div id="smallTittle" style=" position: absolute;  left: -24px;  top: 25px;  text-align: center;  width: 101px;  height: 32px;  background-color: #fff;  line-height: 32px;  border: 2px #DDDDDD solid;  box-shadow: 0px 2px 2px rgba (0,0,0,0.1);  display: none;   z-index: 999;">
+            <div style="left: 42%;  top: -8px;  position: absolute;  width: 0;  height: 0;  border-left: 10px solid transparent;  border-right: 10px solid transparent;  border-bottom: 8px solid #EAEAEA;"></div>
+            积分：19832 </div>
+        </span>  </li>
+    <li>排名：<span>第489名</span></li>
+</ul>
+<ul id="blog_statistics">
+    <li>原创：<span>326篇</span></li>
+    <li>转载：<span>79篇</span></li>
+    <li>译文：<span>4篇</span></li>
+    <li>评论：<span>1308条</span></li>
+</ul>
+</ul>
+</div>
+
+
+     
+
+ 
+
+<div id="custom_column_52875275" class="panel">
+<ul class="panel_body">
+
+<div style="text-align:center"><a href="http://blog.csdn.net/experts/rule.html" target="_blank"><img title="CSDN认证专家" src="http://img.blog.csdn.net/20170503151126372" style="width:60px; height:60px">
+</a></div>
+
+</ul>
+</div>
+ 
+
+<div id="custom_column_42282902" class="panel">
+<ul class="panel_head"><span>大 师 兄 说</span></ul>
+<ul class="panel_body">
+
+<div id="a">
+<div id="b"><img title="刚刚毕业，好好学习。" src="http://forum.csdn.net/PointForum/ui/scripts/csdn/Plugin/003/onion/41.gif" alt="">
+<img title="渐入佳境，高调装&#36924;。" src="http://forum.csdn.net/PointForum/ui/scripts/csdn/Plugin/003/onion/83.gif" alt="">
+<img title="最高境界，低调低调。" src="http://forum.csdn.net/PointForum/ui/scripts/csdn/Plugin/003/onion/2.gif" alt="">
+</div>
+</div>
+<ul id="c">
+<li>交流群：<span style="color:#333">321964905(新建)</span> </li><li>我扣扣：<span style="color:#333">1181415316</span> </li><li>我邮箱：<span style="color:#333">cmshome@163.com</span> </li><li>我&#26684;言：<span style="color:#ff1c1a">&quot;习惯就好&quot;坑了多少人</span> </li><li>暂时在：<span style="color:#333">帝都</span> </li><li>曾工作：<span style="color:#333">成都</span> </li><li>我爱好：<span style="color:#333">海&#36156;王</span> </li><li>我爱好：<span style="color:#333">英雄杀</span> </li><li>我家乡：<span style="color:#333">济源市</span> </li><li>我爱好：<span style="color:#333">写bug</span> </li><li>求求求：<span style="color:#ff1c1a; font-weight:bold">有问题就留言吧</span> </li><li>为啥呢：<span style="color:#ff1c1a">大师兄是一直在维护的</span> </li></ul>
+<ul>
+<marquee style="letter-spacing:5px; color:#ff1c1a; font-weight:bold">你觉得本博文对你有用吗 <span style="font-size:15px; color:#0b0101; font-weight:bold">
+？</span> 有用,那就请点赞留言。<span style="font-size:17px; color:#150c13; font-weight:bold">：</span> 暂时没用，也请不要踩。
+</marquee></ul>
+
+</ul>
+</div>
+<div id="panel_Category" class="panel">
+    <ul class="panel_head"><span>博客专栏</span></ul>
+    <ul class="panel_body" id="sp_column">
+    <table cellpadding="0" cellspacing="0"><tr>
+    <td style="padding:10px 10px 0 0;">
+    <a href="http://blog.csdn.net/column/details/15222.html" target="_blank"><img src="http://img.blog.csdn.net/20170411183415420" style="width:75px;height:75px;" /></a>
+    </td>
+    <td style="padding:10px 0; vertical-align:top;">
+    <a href="http://blog.csdn.net/column/details/15222.html" target="_blank">Intellij Idea</a>
+    <p>文章：52篇</p>
+    <span>阅读：831677</span>
+    </td>
+    </tr></table>
+    </ul>
+</div> 
+<div id="panel_Category" class="panel">
+<ul class="panel_head"><span>文章分类</span></ul>
+<ul class="panel_body">    
+                 <li>
+                    <a href="/qq_27093465/article/category/5659359" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">android</a><span>(11)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6276851" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">android studio</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/7337735" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">aop</a><span>(10)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6330959" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">bug记录</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6137356" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">chosen插件的理解和问题</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6526958" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">css</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6537924" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">design pattern</a><span>(11)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6261184" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">eclipse</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6566826" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">elasticSearch</a><span>(7)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6529258" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">fileIO</a><span>(17)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6808613" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">findBugs</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6469338" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">git/github</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6507204" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">guava</a><span>(8)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6963580" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">hexo</a><span>(5)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6356273" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">http</a><span>(12)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6759169" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">https</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6084591" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">intellij idea</a><span>(53)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/5713091" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java</a><span>(95)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6756972" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">javadoc</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6516995" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java多线程</a><span>(7)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6262729" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">java 提高篇</a><span>(25)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6549428" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">jdbc</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/5713093" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">jquery</a><span>(38)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6973555" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">json</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6104193" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">jsp</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6099177" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">jstl</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6810671" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">jvm</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6481089" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">linux</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6797173" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">log4j</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6486799" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">maven</a><span>(10)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6103109" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">mongo db</a><span>(14)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6750777" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">mongo vue</a><span>(9)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6461222" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">mySQL</a><span>(5)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6532328" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">poi</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6705704" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">python</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6802075" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">reflect</a><span>(6)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6868833" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">sigar</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6434676" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">spring</a><span>(19)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6823657" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">springMVC</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6060227" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">springMVC  注解</a><span>(15)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6104192" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">tiles框架</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/5820331" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">web.xml</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6315205" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">不为人知的东西</a><span>(22)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6556045" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">各种资源分享</a><span>(3)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6795063" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">扩展阅读_IT</a><span>(2)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6362215" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">面试题答案</a><span>(30)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6261175" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">面试题收录</a><span>(11)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/7043517" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">去广告</a><span>(1)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6425275" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">数据库相关概念</a><span>(4)</span>
+                </li>
+                 <li>
+                    <a href="/qq_27093465/article/category/6434678" onclick="_gaq.push(['_trackEvent','function', 'onclick', 'blog_articles_wenzhangfenlei']); ">算法的思想</a><span>(4)</span>
+                </li>
+</ul>
+</div>
+<div id="panel_Archive" class="panel">
+<ul class="panel_head"><span>文章存档</span></ul>
+<ul class="panel_body">
+<div id="archive_list">
+<!--归档统计-->
+<li><a href="/qq_27093465/article/month/2017/12">2017年12月</a><span>(10)</span></li><li><a href="/qq_27093465/article/month/2017/11">2017年11月</a><span>(7)</span></li><li><a href="/qq_27093465/article/month/2017/10">2017年10月</a><span>(4)</span></li><li><a href="/qq_27093465/article/month/2017/09">2017年09月</a><span>(4)</span></li><li><a href="/qq_27093465/article/month/2017/08">2017年08月</a><span>(6)</span></li><li><a href="/qq_27093465/article/month/2017/07">2017年07月</a><span>(8)</span></li><li><a href="/qq_27093465/article/month/2017/06">2017年06月</a><span>(14)</span></li><li><a href="/qq_27093465/article/month/2017/05">2017年05月</a><span>(9)</span></li><li><a href="/qq_27093465/article/month/2017/04">2017年04月</a><span>(15)</span></li><li><a href="/qq_27093465/article/month/2017/03">2017年03月</a><span>(22)</span></li><li><a href="/qq_27093465/article/month/2017/02">2017年02月</a><span>(15)</span></li><li><a href="/qq_27093465/article/month/2017/01">2017年01月</a><span>(11)</span></li><li><a href="/qq_27093465/article/month/2016/12">2016年12月</a><span>(13)</span></li><li><a href="/qq_27093465/article/month/2016/11">2016年11月</a><span>(31)</span></li><li><a href="/qq_27093465/article/month/2016/10">2016年10月</a><span>(34)</span></li><li><a href="/qq_27093465/article/month/2016/09">2016年09月</a><span>(31)</span></li><li><a href="/qq_27093465/article/month/2016/08">2016年08月</a><span>(54)</span></li><li><a href="/qq_27093465/article/month/2016/07">2016年07月</a><span>(14)</span></li><li><a href="/qq_27093465/article/month/2016/06">2016年06月</a><span>(27)</span></li><li><a href="/qq_27093465/article/month/2016/05">2016年05月</a><span>(4)</span></li><li><a href="/qq_27093465/article/month/2016/04">2016年04月</a><span>(3)</span></li><li><a href="/qq_27093465/article/month/2016/03">2016年03月</a><span>(16)</span></li><li><a href="/qq_27093465/article/month/2016/02">2016年02月</a><span>(16)</span></li><li><a href="/qq_27093465/article/month/2016/01">2016年01月</a><span>(11)</span></li><li><a href="/qq_27093465/article/month/2015/12">2015年12月</a><span>(5)</span></li><li><a href="/qq_27093465/article/month/2015/11">2015年11月</a><span>(7)</span></li><li><a href="/qq_27093465/article/month/2015/10">2015年10月</a><span>(4)</span></li><li><a href="/qq_27093465/article/month/2015/09">2015年09月</a><span>(5)</span></li><li><a href="/qq_27093465/article/month/2015/08">2015年08月</a><span>(6)</span></li><li><a href="/qq_27093465/article/month/2015/07">2015年07月</a><span>(3)</span></li>
+</div>
+</ul>
+</div>
+
+<div id="hotarticls" class="panel tracking-ad" data-mod="popu_340">
+<ul class="panel_head">
+    <span>       
+阅读排行    </span>
+</ul>
+
+<ul class="panel_body itemlist">
+<li>
+<a href="/qq_27093465/article/details/52180865" title="Java 枚举(enum) 详解7种常见的用法">Java 枚举(enum) 详解7种常见的用法</a><span>(93517)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/51832189" title="Java中字符串indexof() 的使用方法">Java中字符串indexof() 的使用方法</a><span>(79450)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/50965389" title="IntelliJ IDEA中怎么全局搜索替换(整个项目)(Eclipse)">IntelliJ IDEA中怎么全局搜索替换(整个项目)(Eclipse)</a><span>(77873)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/52957253" title="maven 本地仓库的配置以及如何修改默认.m2仓库位置">maven 本地仓库的配置以及如何修改默认.m2仓库位置</a><span>(57958)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/51750535" title="IntelliJ IDEA中如何显示和关闭----工具栏，目录栏，">IntelliJ IDEA中如何显示和关闭----工具栏，目录栏，</a><span>(51623)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/52857307" title="IntelliJ IDEA 中如何查看一个类的所有继承关系(当前类的所有继承关系图)">IntelliJ IDEA 中如何查看一个类的所有继承关系(当前类的所有继承关系图)</a><span>(49141)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/51312418" title="IntelliJ IDEA 安装插件 (vue)">IntelliJ IDEA 安装插件 (vue)</a><span>(46642)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/52912444" title="IntelliJ IDEA 中 右键新建时，选项没有Java class的解决方法和具体解释">IntelliJ IDEA 中 右键新建时，选项没有Java class的解决方法和具体解释</a><span>(46626)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/50731087" title="js中window.location.search的用法和作用。">js中window.location.search的用法和作用。</a><span>(36703)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/52807666" title="详细图解MySQL（win7x64 5.7.16版本）下载、安装、配置与使用">详细图解MySQL（win7x64 5.7.16版本）下载、安装、配置与使用</a><span>(35902)</span>
+</li>
+</ul>
+</div>
+
+<div id="hotarticls2" class="panel tracking-ad" data-mod="popu_341"">
+<ul class="panel_head"><span>评论排行</span></ul>
+<ul class="panel_body itemlist">
+<li>
+<a href="/qq_27093465/article/details/52817938" title="详细图解如何注册 Navicat for Mysql 11.0.17 企业版（Win7 64bit）">详细图解如何注册 Navicat for Mysql 11.0.17 企业版（Win7 64bit）</a><span>(125)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/63683873" title="IntelliJ IDEA 创建 hello world Java web Maven项目从头到尾都有图有真相2017版本">IntelliJ IDEA 创建 hello world Java web Maven项目从头到尾都有图有真相2017版本</a><span>(92)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/52807666" title="详细图解MySQL（win7x64 5.7.16版本）下载、安装、配置与使用">详细图解MySQL（win7x64 5.7.16版本）下载、安装、配置与使用</a><span>(61)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/64124330" title="Intellij IDEA 2017 debug断点调试技巧与总结详解篇">Intellij IDEA 2017 debug断点调试技巧与总结详解篇</a><span>(61)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/68961393" title="Java springmvc web项目，基于maven的hello world入门级项目使用IntelliJ IDEA 2017版本">Java springmvc web项目，基于maven的hello world入门级项目使用IntelliJ IDEA 2017版本</a><span>(53)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/52957253" title="maven 本地仓库的配置以及如何修改默认.m2仓库位置">maven 本地仓库的配置以及如何修改默认.m2仓库位置</a><span>(48)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/70763536" title="Intellij IDEA 弹窗License activation 报 this license BIG3CLIK6F has been cancelled 错误的解决。">Intellij IDEA 弹窗License activation 报 this license BIG3CLIK6F has been cancelled 错误的解决。</a><span>(39)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/51832189" title="Java中字符串indexof() 的使用方法">Java中字符串indexof() 的使用方法</a><span>(32)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/69226949" title="Intellij IDEA 中如何查看maven项目中所有jar包的依赖关系图">Intellij IDEA 中如何查看maven项目中所有jar包的依赖关系图</a><span>(31)</span>
+</li>
+<li>
+<a href="/qq_27093465/article/details/52180865" title="Java 枚举(enum) 详解7种常见的用法">Java 枚举(enum) 详解7种常见的用法</a><span>(24)</span>
+</li>
+</ul>
+</div>
+
+<div id="newcomments" class="panel">
+<ul class="panel_head"><span>最新评论</span></ul>
+<ul class="panel_body itemlist">
+    <li>
+   
+         <a href="/qq_27093465/article/details/52128952#comments">Java Objects.equals()的作用---避免空指针异常</a>
+    <p style="margin:0px;"><a href="/csxiaoz" class="user_name">csxiaoz</a>:
+不错
+    </p>
+    </li>
+    <li>
+   
+         <a href="/qq_27093465/article/details/52919744#comments">IntelliJ IDEA 的硬件要求</a>
+    <p style="margin:0px;"><a href="/qq_40016423" class="user_name">qq_40016423</a>:
+手动点赞
+    </p>
+    </li>
+    <li>
+   
+         <a href="/qq_27093465/article/details/50982212#comments">忘记svn密码怎么办</a>
+    <p style="margin:0px;"><a href="/dongfengdong" class="user_name">dongfengdong</a>:
+非常给力，谢谢大湿胸
+    </p>
+    </li>
+    <li>
+   
+         <a href="/qq_27093465/article/details/52920035#comments">IntelliJ IDEA 15，16 win 7 64位安装包以及注册码 百度云盘</a>
+    <p style="margin:0px;"><a href="/sinat_38535682" class="user_name">sinat_38535682</a>:
+好人一生平安
+    </p>
+    </li>
+    <li>
+   
+         <a href="/qq_27093465/article/details/74898489#comments">IntelliJ IDEA 下的svn配置及使用的非常详细的图文总结</a>
+    <p style="margin:0px;"><a href="/a466631276" class="user_name">a466631276</a>:
+顶一个
+    </p>
+    </li>
+    <li>
+   
+         <a href="/qq_27093465/article/details/52957253#comments">maven 本地仓库的配置以及如何修改默认.m2仓库位置</a>
+    <p style="margin:0px;"><a href="/White_Mr" class="user_name">White_Mr</a>:
+踩你可能是觉得写的太磨叽了。。。不明了
+    </p>
+    </li>
+    <li>
+   
+         <a href="/qq_27093465/article/details/52912444#comments">IntelliJ IDEA 中 右键新建时，选项没有Java class的解决方法和具体解释</a>
+    <p style="margin:0px;"><a href="/xyh930929" class="user_name">xyh930929</a>:
+有用，谢谢
+    </p>
+    </li>
+    <li>
+   
+         <a href="/qq_27093465/article/details/52918873#comments">IntelliJ IDEA 详细图解最常用的配置 ，适合刚刚用的新人。</a>
+    <p style="margin:0px;"><a href="/qq_34242040" class="user_name">qq_34242040</a>:
+怎么修改项目的tomcat CATALINA_BASE啊
+    </p>
+    </li>
+    <li>
+   
+         <a href="/qq_27093465/article/details/68961393#comments">Java springmvc web项目，基于maven的hello world入门级项目使用IntelliJ IDEA 2017版本</a>
+    <p style="margin:0px;"><a href="/qq_27093465" class="user_name">qq_27093465</a>:
+@qq_37871278:我发现问题啦，我文章里面的web.xml文件的开头那，写的有问题。。。所以...
+    </p>
+    </li>
+    <li>
+   
+         <a href="/qq_27093465/article/details/51750535#comments">IntelliJ IDEA中如何显示和关闭----工具栏，目录栏，</a>
+    <p style="margin:0px;"><a href="/Shizi_Tomato" class="user_name">Shizi_Tomato</a>:
+可以顶
+    </p>
+    </li>
+</ul>
+</div>
+
+    </div>
+    <div class="clear">
+    </div>
+
+                   <div class="tracking-ad" data-view="true" data-mod="ad_popu_189" data-mtp="63" data-order="40" data-con="ad_content_1259" style="width: 250px; height: 500px;">
+                        <div id="nav_show_top_stop" style="width: 250px;height: 500px;z-index:1000"><div id="cpro_u2734133">
+                             <!-- 投放代码 -->
+                             
+                            <!-- 请置于所有广告位代码之前 -->
+                            <script src="http://dup.baidustatic.com/js/ds.js"></script>
+
+                            <!-- 广告位：PC端-博客详情页-左侧button1-250*250 -->
+                                    <script>
+                                        (function () {
+                                            var s = "_" + Math.random().toString(36).slice(2);
+                                            document.write('<div id="' + s + '"></div>');
+                                            (window.slotbydup = window.slotbydup || []).push({
+                                                id: '4740887',
+                                                container: s,
+                                                size: '250,250',
+                                                display: 'inlay-fix'
+                                            });
+                                        })();
+                                    </script>
+
+                                                                                                    </div>
+                            <div id="cpro_u3031286">
+                                 <!-- 投放代码 -->
+                               
+                                <!-- 请置于所有广告位代码之前 -->
+                                <script src="http://dup.baidustatic.com/js/ds.js"></script>
+
+                                <!-- 广告位：PC端-博客详情页-左侧Button2-250*250 -->
+                                <script>
+                                    (function () {
+                                        var s = "_" + Math.random().toString(36).slice(2);
+                                        document.write('<div id="' + s + '"></div>');
+                                        (window.slotbydup = window.slotbydup || []).push({
+                                            id: '4740890',
+                                            container: s,
+                                            size: '250,250',
+                                            display: 'inlay-fix'
+                                        });
+                                    })();
+                                </script>
+
+
+
+                            </div></div>
+                   </div>
+                    <script>
+
+                        setTimeout(function () {
+                            var naviga_offsetTop = 0; function naviga_stay_top() {
+                                var scrollTop = jQuery(document).scrollTop();
+                                if (scrollTop > naviga_offsetTop) {
+                                    jQuery("#nav_show_top_stop").css({ "position": "fixed" });
+                                    jQuery("#nav_show_top_stop").css({ "top": "0px" });
+                                } else { jQuery("#nav_show_top_stop").css({ "position": "fixed" }); jQuery("#nav_show_top_stop").css({ "top": naviga_offsetTop - scrollTop + "px" }); }
+                            }
+                            function onload_function() {
+                                naviga_offsetTop = jQuery("#nav_show_top_stop").position().top;
+                                jQuery(window).bind("scroll", naviga_stay_top); jQuery(window).bind("mousewheel", naviga_stay_top);
+                                jQuery(document).bind("scroll", naviga_stay_top); jQuery(document).bind("mousewheel", naviga_stay_top);
+                            } jQuery(document).ready(onload_function);
+                        }, 200);
+
+                    </script>
+
+           </div>   
+            <div class="clear">
+            </div>
+        </div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+    $(function () {
+        function __get_code_toolbar(snippet_id) {
+            return $("<span class='tracking-ad' data-mod='popu_167'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "' target='_blank' title='在CODE上查看代码片'  style='text-indent:0;'><img src='https://code.csdn.net/assets/CODE_ico.png' width=12 height=12 alt='在CODE上查看代码片' style='position:relative;top:1px;left:2px;'/></a></span>"
+                    + "<span class='tracking-ad' data-mod='popu_170'><a href='https://code.csdn.net/snippets/"
+                    + snippet_id
+                    + "/fork' target='_blank' title='派生到我的代码片' style='text-indent:0;'><img src='https://code.csdn.net/assets/ico_fork.svg' width=12 height=12 alt='派生到我的代码片' style='position:relative;top:2px;left:2px;'/></a></span>");
+        }
+        
+        $("[code_snippet_id]").each(function () {
+            __s_id = $(this).attr("code_snippet_id");
+            if (__s_id != null && __s_id != "" && __s_id != 0 && parseInt(__s_id) > 70020) {
+                __code_tool = __get_code_toolbar(__s_id);
+                $(this).prev().find(".tools").append(__code_tool);
+            }
+        });
+
+        $(".bar").show();
+    });
+</script>
+
+
+
+
+
+    </div>
+     
+
+
+       <script type="text/javascript" src="http://static.blog.csdn.net/public/res/bower-libs/MathJax/MathJax.js?config=TeX-AMS_HTML"></script>   
+    
+    <script src="http://static.blog.csdn.net/scripts/csdn_blog_detail.min.js?v2017.041" type="text/javascript"></script>
+        
+    <script type="text/javascript" src="http://csdnimg.cn/blog/csdn_public_blog_detail.min.js?20171208115"></script>
+
+    <script type="text/javascript" src="http://medal.blog.csdn.net/showblogmedal.ashx?blogid=5106543"></script>
+
+
+  <div id="a52b5334d" style="width: 1px; height: 1px; display: none;">
+                    <script id="adJs52b5334"></script>
+                    <script>document.getElementById("adJs52b5334").src = "http://ads.csdn.net/js/opt/52b5334.js?t=" + Math.random();</script>
+   </div>
+          
+    <div class="pop_CA_cover"  style="display:none"></div>
+    <div class="pop pop_CA"  style="display:none">
+          <div class="CA_header">
+            收藏助手
+            <span class="cancel_icon"  id="fapancle"  onclick="$('.pop_CA').hide();$('.pop_CA_cover').hide();"></span>
+          </div>
+          <iframe src="" id="fa" frameborder="0" width="100%" height="360"  scrolling="no" ></iframe>
+    </div>
+
+
+        <script type="text/javascript">
+
+            $(function () {
+                var fromjs = $("#fromjs");
+                if (fromjs.length > 0) {
+                    $("#fromjs .markdown_views pre").addClass("prettyprint");
+                    prettyPrint();
+
+                    $('pre.prettyprint code').each(function () {
+                        var lines = $(this).text().split('\n').length;
+                        var $numbering = $('<ul/>').addClass('pre-numbering').hide();
+                        $(this).addClass('has-numbering').parent().append($numbering);
+                        for (i = 1; i <= lines; i++) {
+                            $numbering.append($('<li/>').text(i));
+                        };
+                        $numbering.fadeIn(1700);
+                    });
+
+                    $('.pre-numbering li').css("color", "#999");
+                }
+            });
+
+            $(".markdown_views a[target!='_blank']").attr("target", "_blank");
+
+            //$(".toc a[target='_blank']").attr("target", "");
+
+            setTimeout(function () {
+                $(".toc a[target='_blank']").attr("target", "");
+            }, 500);
+
+        </script>
+
+</body>
+</html>   
