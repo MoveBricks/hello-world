@@ -6,4 +6,5 @@
   <br>4.类加载器
 <br>二.basic_zkz项目中是java基础练习
 <br>三.资料
-<br>1.https://github.com/527515025/springBoot  springboot 框架与其它组件结合如 jpa、mybatis、websocket、security、shiro、cache等
+<br>1.https://github.com/527515025/springBoot 
+<br>springboot 框架与其它组件结合如 jpa、mybatis、websocket、security、shiro、cache等
